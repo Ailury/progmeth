@@ -160,11 +160,11 @@ public class Player extends Entity {
 			if(!lastFrameStatus.equals(status) && atkable < 41) getImage().loadImage(getImage().getFilepath());
 			if(atkable < 41 && status != PlayerStatus.DIE) {
 //				if(direction != -1) super.draw(gc, false);
-				if(direction != -1)super.draw(gc, getImage().getImage(), getX(), getY(), getW(), getH());
+				if(!face.equals(PlayerStatus.LEFT))super.draw(gc, getImage().getImage(), getX(), getY(), getW(), getH());
 				else super.draw(gc, true);
 			}else {
-				if(direction != -1)super.draw(gc, getImage().getImage(), getX(), getY(), (getW()*5)/3, getH());
-				else super.draw(gc,getImage().getImage(), getX()+getW(),getY(),-getW(),getH());
+				if(!face.equals(PlayerStatus.LEFT))super.draw(gc, getImage().getImage(), getX()-getW()/3, getY(), (getW()*5)/3, getH());
+				else super.draw(gc,getImage().getImage(), getX()+getW()*4/3,getY(),-getW()*5/3,getH());
 			}
 		}
 	}
