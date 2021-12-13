@@ -35,7 +35,6 @@ public class Player extends Entity implements Collidable, Fallable{
 	
 	// Jumping
 	private PlayerStatus jumpStatus;
-	private static double jumpSpeed;
 	private static double initJumpSpeed = 10;
 	
 	
@@ -53,6 +52,7 @@ public class Player extends Entity implements Collidable, Fallable{
 	private static final Sprite attack = new Sprite("sprite/character/player/attack.gif");
 	
 	private double prevx;
+	private double prevy;
 	
 
 	public Player() {
@@ -60,7 +60,6 @@ public class Player extends Entity implements Collidable, Fallable{
 		
 		super(150,550,120,120);
 		lastFrameStatus = PlayerStatus.IDLE;
-		jumpSpeed = 0;
 		status = PlayerStatus.IDLE;
 		jumpStatus = PlayerStatus.ONGROUND;
 		direction = 0;
@@ -92,9 +91,20 @@ public class Player extends Entity implements Collidable, Fallable{
 		}else {
 			if(KeyHandler.getInstance().getKeyStatus(68).equals(KeyStatus.DOWN)) {
 				if(getX() < SceneManager.getInstance().getRightBound()) increaseX(moveSpeed);;
+				
+				for(Tile tile : SceneManager.getInstance().getTiles()) {
+					if( (tile.getUpperBound() < getY()+getH() && tile.getUpperBound() > getY()) || (tile.getLowerBound() < getY()+getH() && tile.getLowerBound() > getY()) || 
+							(getY() > tile.getUpperBound() && getY() < tile.getLowerBound() && getY()+getH() > tile.getUpperBound() && getY()+getH() < tile.getLowerBound()) ) {
+						if(getX()+getW() > tile.getLeftBound() -1  && getX() < tile.getLeftBound() ) {
+							setX(tile.getLeftBound()-getW() - 1);
+						}
+					}
+				}
+				
+				
 				if(getX() > SceneManager.getInstance().getRightBound()- getW()) setX(SceneManager.getInstance().getRightBound() - getW());
 				
-				if(getX() >= SceneManager.getInstance().getLeftBound() + 640 - getW()) {
+				if(getX() >= SceneManager.getInstance().getLeftBound() + 640 - getW() && prevx != getX()) {
 					double newOffSetX = SceneManager.getInstance().getOffsetX()+moveSpeed ;
 					newOffSetX = (newOffSetX > SceneManager.getInstance().getRightBound() - 1280) ?  SceneManager.getInstance().getRightBound() - 1280 : newOffSetX; 
 					SceneManager.getInstance().setOffsetX(newOffSetX);
@@ -105,9 +115,19 @@ public class Player extends Entity implements Collidable, Fallable{
 			}
 			if(KeyHandler.getInstance().getKeyStatus(65).equals(KeyStatus.DOWN)) {
 				if(getX() > SceneManager.getInstance().getLeftBound()) increaseX(-moveSpeed);;
+				
+				for(Tile tile : SceneManager.getInstance().getTiles()) {
+					if( (tile.getUpperBound() < getY()+getH() && tile.getUpperBound() > getY()) || (tile.getLowerBound() < getY()+getH() && tile.getLowerBound() > getY()) || 
+							(getY() > tile.getUpperBound() && getY() < tile.getLowerBound() && getY()+getH() > tile.getUpperBound() && getY()+getH() < tile.getLowerBound()) ) {
+						if(getX()+getW() >= tile.getRightBound() && getX() < tile.getRightBound() + 1) {
+							setX(tile.getRightBound() + 1);
+						}
+					}
+				}
+				
 				if(getX() < SceneManager.getInstance().getLeftBound()) setX(SceneManager.getInstance().getLeftBound());
 					
-				if(getX() <= SceneManager.getInstance().getRightBound() - 640 - getW()) {
+				if(getX() <= SceneManager.getInstance().getRightBound() - 640 - getW() && prevx != getX()) {
 					double newOffSetX = SceneManager.getInstance().getOffsetX()-moveSpeed;
 					newOffSetX = (newOffSetX < SceneManager.getInstance().getLeftBound()) ?  SceneManager.getInstance().getLeftBound() : newOffSetX; 
 					SceneManager.getInstance().setOffsetX(newOffSetX);
@@ -125,7 +145,6 @@ public class Player extends Entity implements Collidable, Fallable{
 			if(KeyHandler.getInstance().getKeyStatus(32).equals(KeyStatus.DOWN)) {
 				if(jumpStatus.equals(PlayerStatus.ONGROUND)) {
 					setVy(-initJumpSpeed);
-					jumpSpeed = initJumpSpeed;
 					jumpStatus = PlayerStatus.GOINGUP;
 				}
 			}
@@ -158,10 +177,16 @@ public class Player extends Entity implements Collidable, Fallable{
 		increaseY(getVy());
 		setVy(getVy() + GameUtil.gravity);
 		for(Tile tile : SceneManager.getInstance().getTiles()) {
-			if(getX() >= tile.getLeftBound() && getX()+getW() <= tile.getRightBound()) {
-				if(getY()+getH() > tile.getUpperBound() && getY() <= tile.getLowerBound()) {
+			if( (getX() >= tile.getLeftBound() && getX() <= tile.getRightBound()) || (getX()+getW() >= tile.getLeftBound() && getX()+getW() <= tile.getRightBound()) ) {
+				if(getY()+getH() > tile.getUpperBound() && getY() <= tile.getUpperBound()) {
 					setY(tile.getUpperBound()  - getH());
 					jumpStatus = PlayerStatus.ONGROUND;
+					setVy(0);
+				}
+				
+				if(getY()+getH() >= tile.getLowerBound() && getY() < tile.getLowerBound() && !tile.isTransparent()) {
+					setY(tile.getLowerBound() );
+					jumpStatus = PlayerStatus.FALLING;
 					setVy(0);
 				}
 			}

@@ -5,7 +5,7 @@ import component.Sprite;
 
 public class Tile extends Entity {
 	
-	private static boolean transparent;
+	private boolean transparent;
 	private double upperBound;
 	private double lowerBound;
 	private double rightBound;
@@ -55,14 +55,10 @@ public class Tile extends Entity {
 		return leftBound;
 	}
 
-	public static boolean isTransparent() {
+	public boolean isTransparent() {
 		return transparent;
 	}
 
-	public static void setTransparent(boolean transparent) {
-		Tile.transparent = transparent;
-	}
-	
 	
 	
 	//@Override

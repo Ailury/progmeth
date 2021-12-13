@@ -20,14 +20,14 @@ public class TileBackground extends Entity {
 	public TileBackground() {
 		// TODO Auto-generated constructor stub
 		super(x,y,1280,720);
-		tileBackgroundSprite = new Sprite("sprite/background/level_tiles.png");
+		tileBackgroundSprite = new Sprite("sprite/background/level_tiles2.png");
 		
 	}
 	
 	public TileBackground(double x, double y) {
 		// TODO Auto-generated constructor stub
 		super(x,y,1280,720);
-		tileBackgroundSprite = new Sprite("sprite/background/level_tiles.png");
+		tileBackgroundSprite = new Sprite("sprite/background/level_tiles2.png");
 	}
 	
 	@Override

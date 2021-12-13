@@ -89,6 +89,10 @@ public class SceneManager extends Canvas implements Serializable {
 		for(Interactable i : interactable) {
 			if(i instanceof Entity) ((Entity) i).draw(gc,false);
 		}
+		for(Tile tile : tiles) {
+			gc.strokeRect(tile.getX() - offsetX, tile.getY(), tile.getW(), tile.getH());
+		
+		}
 		player.draw(gc,false);
 	}
 	
