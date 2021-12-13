@@ -43,8 +43,8 @@ public class Powerup extends Entity implements Collidable{
 		int rand2 = rand.nextInt(600)+1400;
 		int rand3 = rand.nextInt(4);
 		int rand4 = rand.nextInt(4);
-		SceneManager.getInstance().getCollidable().add(new Powerup(rand1,rand3));
-		SceneManager.getInstance().getCollidable().add(new Powerup(rand2,rand4));
+		SceneManager.getInstance().getCollidable().add(new Powerup(rand1,2));
+		SceneManager.getInstance().getCollidable().add(new Powerup(rand2,2));
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class Powerup extends Entity implements Collidable{
 					if(type==1){
 						SceneManager.getInstance().getPlayer().changeAtk(10);
 						try {
-							Thread.sleep(20);
+							Thread.sleep(20000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -67,7 +67,7 @@ public class Powerup extends Entity implements Collidable{
 					if(type==2){
 						SceneManager.getInstance().getPlayer().changeJumpH(5);
 						try {
-							Thread.sleep(20);
+							Thread.sleep(20000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -77,7 +77,7 @@ public class Powerup extends Entity implements Collidable{
 					if(type==3){
 						SceneManager.getInstance().getPlayer().changemvsp(3);
 						try {
-							Thread.sleep(20);
+							Thread.sleep(20000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -86,6 +86,7 @@ public class Powerup extends Entity implements Collidable{
 					}
 				}).start();;
 			}
+			SceneManager.getInstance().getCollidable().remove(this);
 		}
 	}
 

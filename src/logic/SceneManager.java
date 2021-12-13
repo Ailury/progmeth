@@ -47,7 +47,6 @@ public class SceneManager extends Canvas implements Serializable {
 		offsetX = 0;
 		offsetY = 0;
 		
-		gameStart();
 	}
 	
 	public static SceneManager getInstance() {
