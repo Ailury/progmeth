@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import logic.HomeScreen;
 import logic.KeyHandler;
 import logic.SceneManager;
 import java.time.Instant;
@@ -19,31 +20,13 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub
-		StackPane root = new StackPane();
-		Scene scene = new Scene(root);
-		scene.setFill(Color.PINK);
+		Scene scene = new Scene(new HomeScreen(stage));
+		scene.setFill(Color.BLACK);
 		stage.setScene(scene);
 		stage.setTitle("Zenith chronicle");
-		SceneManager.getInstance().gameStart();
-		root.getChildren().add(KeyHandler.getInstance());
-		root.getChildren().add(SceneManager.getInstance());
-		KeyHandler.getInstance().requestFocus();
 		stage.setResizable(true);
 		stage.show();
 		
-		AnimationTimer animation = new AnimationTimer(){
-			public void handle(long now){
-				 new Thread(() -> {
-					KeyHandler.getInstance().update();
-					SceneManager.getInstance().update(); } ).start();
-					try {Thread.sleep(5);
-					} catch(Exception e) {} 
-			
-					//KeyHandler.getInstance().update();
-					//SceneManager.getInstance().update();
-			}
-		};
-		animation.start();
 	}
 
 }
