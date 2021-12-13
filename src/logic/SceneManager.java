@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import component.Entity;
 import entity.Background;
 import entity.Player;
+import entity.flag;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -66,6 +67,7 @@ public class SceneManager extends Canvas implements Serializable {
 	
 	public void gameStart() {
 		entitys.add(new Background());
+		entitys.add(new flag());
 	}
 
 

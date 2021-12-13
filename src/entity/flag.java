@@ -10,7 +10,7 @@ public class flag extends Entity {
 	private Sprite portal;
 	
 	public flag() {
-		super(1280*2-200, SceneManager.getGround(), 90, 150);
+		super(1280-200, SceneManager.getGround()-150, 90, 150);
 		// TODO Auto-generated constructor stub
 		portal = new Sprite("sprite/checkpoint/portal_end.gif");
 	}
@@ -27,9 +27,9 @@ public class flag extends Entity {
 		return portal;
 	}
 	
-	@Override
-	public void draw(GraphicsContext gc,boolean f) {
-		super.draw(gc, f);
-	}
+//	@Override
+//	public void draw(GraphicsContext gc,boolean f) {
+//		super.draw(gc, f);
+//	}
 
 }
