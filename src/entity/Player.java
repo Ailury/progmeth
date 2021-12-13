@@ -17,16 +17,19 @@ public class Player extends Entity {
 	private static int immune = 0;
 	protected static PlayerStatus face = PlayerStatus.RIGHT;
 	private static final AudioClip atkSound = new AudioClip(ClassLoader.getSystemResource("attackk.wav").toString());
+	private static final double g = 0.35  ;
 		
 	// IDLE/RUN
 	private PlayerStatus status;
+	private PlayerStatus lastFrameStatus;
 	private int direction;
 	private static final double moveSpeed = 7.0;
 	
 	// Jumping
 	private PlayerStatus jumpStatus;
-	private static final double jumpSpeed = 2.5;
-	private static final int maxJumpHeight = 70;
+	private static double jumpSpeed;
+	private static final double initJumpSpeed = 10;
+	private static final int maxJumpHeight = 300;
 	private double currentJumpHeight;
 	
 	// Position
@@ -37,14 +40,20 @@ public class Player extends Entity {
 	// Images
 	private static final Sprite idle = new Sprite("idle.gif");
 	private static final Sprite run = new Sprite("run.gif");
-	private static final Sprite jump = new Sprite("jump.gif");
+	private static final Sprite jump_up = new Sprite("jump_up.gif");
+	private static final Sprite jump_down = new Sprite("jump_down.gif");
 	private static final Sprite death = new Sprite("death.gif");
 	private static final Sprite atk = new Sprite("attack.gif");
-		
+	
+	
+	private double prevY ;
 
 	public Player() {
 		// TODO Auto-generated constructor stub
+		
 		super(250,SceneManager.getGround()-120,120,120);
+		lastFrameStatus = PlayerStatus.IDLE;
+		prevY = SceneManager.getGround();
 		status = PlayerStatus.IDLE;
 		jumpStatus = PlayerStatus.ONGROUND;
 		direction = 0;
@@ -54,16 +63,19 @@ public class Player extends Entity {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+		lastFrameStatus = status;
 		status = PlayerStatus.RUN;
 		if(needResetPos) {
 			needResetPos = false;
 		}
-		if(atkable ==0 && currentJumpHeight==0 && KeyHandler.getInstance().getKeyStatus(83).equals(KeyStatus.DOWN)) {
-			atkable += 101;
+		if(atkable == 0 && jumpStatus.equals(PlayerStatus.ONGROUND) && KeyHandler.getInstance().getKeyStatus(83).equals(KeyStatus.DOWN)) {
+			
+			atkable += 81;
 			atkSound.play();
 			attack();
+			atk.loadImage(atk.getFilepath());
 		}
-		if(atkable > 93) {
+		if(atkable > 41) {
 			status = PlayerStatus.ATTACKING;
 		}else {
 			if(KeyHandler.getInstance().getKeyStatus(68).equals(KeyStatus.DOWN)) {
@@ -84,6 +96,7 @@ public class Player extends Entity {
 			if(direction == 0) {status = PlayerStatus.IDLE;}
 			if(KeyHandler.getInstance().getKeyStatus(32).equals(KeyStatus.DOWN)) {
 				if(jumpStatus.equals(PlayerStatus.ONGROUND)) {
+					jumpSpeed = initJumpSpeed;
 					jumpStatus = PlayerStatus.GOINGUP;
 				}
 			}
@@ -91,15 +104,21 @@ public class Player extends Entity {
 		if(jumpStatus.equals(PlayerStatus.GOINGUP)) {
 			currentJumpHeight += jumpSpeed;
 			increaseY(-jumpSpeed);
-			if(currentJumpHeight == maxJumpHeight) {
+			jumpSpeed = (jumpSpeed > 0) ? jumpSpeed - g : 0;
+			if(currentJumpHeight >= maxJumpHeight || jumpSpeed == 0) {
 				jumpStatus = PlayerStatus.FALLING;
 			}
 		}
 		if(jumpStatus.equals(PlayerStatus.FALLING)) {
 			currentJumpHeight -= jumpSpeed;
+			if(currentJumpHeight <= 0) jumpSpeed -= -currentJumpHeight;
 			increaseY(jumpSpeed);
+			if(getY() > 530) setY(SceneManager.getGround() - getH());
+			jumpSpeed = jumpSpeed + g;
 			if(currentJumpHeight <= 0) {
+				currentJumpHeight = 0;
 				jumpStatus = PlayerStatus.ONGROUND;
+				jumpSpeed = initJumpSpeed;
 			}
 		}
 		if(immune ==0) {
@@ -110,6 +129,8 @@ public class Player extends Entity {
 				}
 			}
 		}
+		if(getY() != prevY)System.out.println(getY());
+		prevY = getY();
 		atkable = (atkable == 0) ? atkable : atkable - 1;
 		immune = (immune == 0) ? immune : immune - 1;
 	}
@@ -117,11 +138,14 @@ public class Player extends Entity {
 	@Override
 	public Sprite getImage() {
 		// TODO Auto-generated method stub
-		if(status == PlayerStatus.ATTACKING) {
+		if(atkable > 40) {
 			return atk;
 		}
-		if(!jumpStatus.equals(PlayerStatus.ONGROUND)){
-			return jump;
+		if(jumpStatus.equals(PlayerStatus.GOINGUP)){
+			return jump_up;
+		}
+		if(jumpStatus.equals(PlayerStatus.FALLING)){
+			return jump_down;
 		}
 		if(status.equals(PlayerStatus.RUN)) {
 			return run;
@@ -133,12 +157,13 @@ public class Player extends Entity {
 	public void draw(GraphicsContext gc,boolean f) {
 		// TODO Auto-generated method stub
 		if(immune%2 == 0) {
-			if(status != PlayerStatus.ATTACKING && status != PlayerStatus.DIE) {
+			if(!lastFrameStatus.equals(status) && atkable < 41) getImage().loadImage(getImage().getFilepath());
+			if(atkable < 41 && status != PlayerStatus.DIE) {
 //				if(direction != -1) super.draw(gc, false);
 				if(direction != -1)super.draw(gc, getImage().getImage(), getX(), getY(), getW(), getH());
 				else super.draw(gc, true);
 			}else {
-				if(direction != -1)super.draw(gc, getImage().getImage(), getX(), getY(), getW(), getH());
+				if(direction != -1)super.draw(gc, getImage().getImage(), getX(), getY(), (getW()*5)/3, getH());
 				else super.draw(gc,getImage().getImage(), getX()+getW(),getY(),-getW(),getH());
 			}
 		}

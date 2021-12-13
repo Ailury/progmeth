@@ -24,11 +24,14 @@ public class SceneManager extends Canvas implements Serializable {
 	
 	private SceneManager() {
 		// TODO Auto-generated constructor stub
+		super(1280, 720);
+		
 		entitys = new ArrayList<Entity>();
 		player = new Player();
 		level = 0;
 		offsetX = 0;
 		offsetY = 0;
+		
 		gameStart();
 	}
 	
@@ -46,8 +49,8 @@ public class SceneManager extends Canvas implements Serializable {
 	}
 	
 	public void draw() {
-		GraphicsContext gc = this.getGraphicsContext2D();
-		gc.setFill(Color.BLACK);
+		GraphicsContext gc = getGraphicsContext2D();
+		gc.setFill(Color.RED);
 		for(Entity e : entitys) {
 			e.draw(gc,false);
 		}

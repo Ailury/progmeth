@@ -61,6 +61,14 @@ public abstract class Entity implements Serializable{
 		this.radius = this.w/2;
 	}
 
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
 	public void setH(int h) {
 		this.h += h;
 	}

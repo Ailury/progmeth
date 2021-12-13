@@ -35,7 +35,9 @@ public class Background extends Entity {
 	
 	@Override
 	public void draw(GraphicsContext gc,boolean f) {
-		super.draw(gc, getImage().getImage(), SceneManager.getInstance().getOffsetX(), SceneManager.getInstance().getOffsetY(), width, height);
+		//System.out.println("draw bg");
+		//super.draw(gc, getImage().getImage(), SceneManager.getInstance().getOffsetX(), SceneManager.getInstance().getOffsetY(), width, height);
+		super.draw(gc, getImage().getImage(), x, y, width, height);
 	}
 
 }
