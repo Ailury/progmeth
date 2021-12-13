@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import logic.SceneManager;
 
 public abstract class Entity implements Serializable{
 
@@ -33,14 +34,14 @@ public abstract class Entity implements Serializable{
 	public abstract Sprite getImage();
 	
 	public void draw(GraphicsContext gc,Image img,double x,double y,int w,int h) {
-		gc.drawImage(img, x, y, w, h);
+		gc.drawImage(img, x-SceneManager.getInstance().getOffsetX(), y, w, h);
 	}
 	
 	public void draw(GraphicsContext gc,boolean f) {
 		if(f) {
-			gc.drawImage(getImage().getImage(), x + w, y, -w, h);
+			gc.drawImage(getImage().getImage(), x + w-SceneManager.getInstance().getOffsetX(), y, -w, h);
 		}
-		else gc.drawImage(getImage().getImage(), x, y, w, h);
+		else gc.drawImage(getImage().getImage(), x-SceneManager.getInstance().getOffsetX(), y, w, h);
 	}
 	
 	public boolean collideWith(Entity other) {
