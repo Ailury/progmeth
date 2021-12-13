@@ -40,7 +40,6 @@ public class HomeScreen extends GridPane {
 			public void handle(ActionEvent e) {
 				
 				stage.close();
-
 				setVisible(false);
 				name1.setVisible(false);
 				name2.setVisible(false);
@@ -64,12 +63,8 @@ public class HomeScreen extends GridPane {
 							KeyHandler.getInstance().update();
 							SceneManager.getInstance().update();}).start();
 							} ).start();
-						 
 						try {Thread.sleep(5);
 						} catch(Exception e) {} 
-					
-							//KeyHandler.getInstance().update();
-							//SceneManager.getInstance().update();
 					}
 				};
 				animation.start();
