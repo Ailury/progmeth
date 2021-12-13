@@ -1,6 +1,7 @@
 package entity;
 
 import component.Enemy;
+import component.Sprite;
 
 public class Boss extends Enemy {
 
@@ -9,9 +10,16 @@ public class Boss extends Enemy {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Boss(double x, double y, int r) {
-		super(x, y, r);
-		// TODO Auto-generated constructor stub
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Sprite getImage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
