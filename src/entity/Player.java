@@ -52,7 +52,7 @@ public class Player extends Entity implements Collidable {
 	public Player() {
 		// TODO Auto-generated constructor stub
 		
-		super(250,SceneManager.getGround()-120,90,90);
+		super(350,SceneManager.getGround()-120,90,90);
 		lastFrameStatus = PlayerStatus.IDLE;
 		
 		status = PlayerStatus.IDLE;
@@ -168,7 +168,7 @@ public class Player extends Entity implements Collidable {
 			if(atkable < 41 && status != PlayerStatus.DIE) {
 //				if(direction != -1) super.draw(gc, false);
 				if(!face.equals(PlayerStatus.LEFT))super.draw(gc, getImage().getImage(), getX(), getY(), getW(), getH());
-				else super.draw(gc, true);
+				else super.draw(gc, getImage().getImage(),getX()+getW(),getY(),-getW(),getH());
 			}else {
 				if(!face.equals(PlayerStatus.LEFT))super.draw(gc, getImage().getImage(), getX()-getW()/3, getY(), (getW()*5)/3, getH());
 				else super.draw(gc,getImage().getImage(), getX()+getW()*4/3,getY(),-getW()*5/3,getH());

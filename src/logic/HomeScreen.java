@@ -38,6 +38,8 @@ public class HomeScreen extends GridPane {
 		
 		start.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
+				
+				stage.close();
 
 				setVisible(false);
 				name1.setVisible(false);
