@@ -28,7 +28,7 @@ public class Main extends Application {
 		root.getChildren().add(KeyHandler.getInstance());
 		root.getChildren().add(SceneManager.getInstance());
 		KeyHandler.getInstance().requestFocus();
-		stage.setResizable(false);
+		stage.setResizable(true);
 		stage.show();
 		
 		AnimationTimer animation = new AnimationTimer(){
