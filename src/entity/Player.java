@@ -17,7 +17,7 @@ public class Player extends Entity implements Collidable {
 	private static int atkable = 0;
 	private static int immune = 0;
 	protected static PlayerStatus face = PlayerStatus.RIGHT;
-	//private static final AudioClip atkSound = new AudioClip(ClassLoader.getSystemResource("attackk.wav").toString());
+//	private static final AudioClip atkSound = new AudioClip(ClassLoader.getSystemResource("attackk.wav").toString());
 	private static final double g = 0.35  ;
 		
 	// IDLE/RUN
