@@ -11,7 +11,7 @@ public class Portal extends Entity implements Collidable {
 	private Sprite portal;
 	
 	public Portal() {
-		super(1280*2-200, SceneManager.getGround()-150, 90, 150);
+		super(SceneManager.getInstance().getRightBound() - 200, SceneManager.getGround()-150, 90, 150);
 		// TODO Auto-generated constructor stub
 		portal = new Sprite("sprite/checkpoint/portal_end.gif");
 	}

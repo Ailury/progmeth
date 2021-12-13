@@ -51,7 +51,7 @@ public class Player extends Entity implements Collidable {
 	private static final Sprite death = new Sprite("sprite/character/player/death.gif");
 	private static final Sprite attack = new Sprite("sprite/character/player/attack.gif");
 	
-	
+	private double prevx;
 	
 
 	public Player() {
@@ -73,6 +73,8 @@ public class Player extends Entity implements Collidable {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+		prevx = getX();
+		
 		lastFrameStatus = status;
 		status = PlayerStatus.RUN;
 		if(needResetPos) {
@@ -89,12 +91,12 @@ public class Player extends Entity implements Collidable {
 			status = PlayerStatus.ATTACKING;
 		}else {
 			if(KeyHandler.getInstance().getKeyStatus(68).equals(KeyStatus.DOWN)) {
-				if(getX() < SceneManager.getInstance().getRightBound() + 1280) increaseX(moveSpeed);;
-				if(getX() > SceneManager.getInstance().getRightBound() + 1280 - getW()) setX(SceneManager.getInstance().getRightBound() + 1280 - getW());
+				if(getX() < SceneManager.getInstance().getRightBound()) increaseX(moveSpeed);;
+				if(getX() > SceneManager.getInstance().getRightBound()- getW()) setX(SceneManager.getInstance().getRightBound() - getW());
 				
 				if(getX() >= SceneManager.getInstance().getLeftBound() + 540) {
-					double newOffSetX = SceneManager.getInstance().getOffsetX()+moveSpeed;
-					newOffSetX = (newOffSetX > SceneManager.getInstance().getRightBound()) ?  SceneManager.getInstance().getRightBound() : newOffSetX; 
+					double newOffSetX = SceneManager.getInstance().getOffsetX()+moveSpeed ;
+					newOffSetX = (newOffSetX > SceneManager.getInstance().getRightBound() - 1280) ?  SceneManager.getInstance().getRightBound() - 1280 : newOffSetX; 
 					SceneManager.getInstance().setOffsetX(newOffSetX);
 				}
 				
@@ -105,7 +107,7 @@ public class Player extends Entity implements Collidable {
 				if(getX() > SceneManager.getInstance().getLeftBound()) increaseX(-moveSpeed);;
 				if(getX() < SceneManager.getInstance().getLeftBound()) setX(SceneManager.getInstance().getLeftBound());
 					
-				if(getX() <= SceneManager.getInstance().getRightBound() + 1280 - 540) {
+				if(getX() <= SceneManager.getInstance().getRightBound()- 540) {
 					double newOffSetX = SceneManager.getInstance().getOffsetX()-moveSpeed;
 					newOffSetX = (newOffSetX < SceneManager.getInstance().getLeftBound()) ?  SceneManager.getInstance().getLeftBound() : newOffSetX; 
 					SceneManager.getInstance().setOffsetX(newOffSetX);
@@ -131,7 +133,7 @@ public class Player extends Entity implements Collidable {
 			currentJumpHeight += jumpSpeed;
 			increaseY(-jumpSpeed);
 			jumpSpeed = (jumpSpeed > 0) ? jumpSpeed - g : 0;
-			if(currentJumpHeight >= maxJumpHeight || jumpSpeed == 0) {
+			if(jumpSpeed == 0) {
 				jumpStatus = PlayerStatus.FALLING;
 			}
 		}

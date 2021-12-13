@@ -34,7 +34,7 @@ public class SceneManager extends Canvas implements Serializable {
 	private int level;
 	
 	private static final double leftBound = 0;
-	private static final double rightBound = 1280;
+	private static final double rightBound = 3200;
 	
 	private SceneManager() {
 		// TODO Auto-generated constructor stub
