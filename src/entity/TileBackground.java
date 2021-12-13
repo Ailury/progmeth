@@ -5,27 +5,29 @@ import component.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import logic.SceneManager;
 
-public class Background extends Entity {
+public class TileBackground extends Entity {
 	// Position
 	public static double x = 0;
 	public static double y = 0;
-	public static final int width = 1280;
+	public static final int width = 3200;
 	public static final int height = 720;
 
 	// Images
-	private static Sprite backgroundSprite;
+	private static Sprite tileBackgroundSprite;
+	
 	
 
-	public Background() {
+	public TileBackground() {
 		// TODO Auto-generated constructor stub
 		super(x,y,1280,720);
-		backgroundSprite = new Sprite("sprite/background/jungle.png");
+		tileBackgroundSprite = new Sprite("sprite/background/level_tiles.png");
+		
 	}
 	
-	public Background(double x, double y) {
+	public TileBackground(double x, double y) {
 		// TODO Auto-generated constructor stub
 		super(x,y,1280,720);
-		backgroundSprite = new Sprite("sprite/background/jungle.png");
+		tileBackgroundSprite = new Sprite("sprite/background/level_tiles.png");
 	}
 	
 	@Override
@@ -37,14 +39,14 @@ public class Background extends Entity {
 	@Override
 	public Sprite getImage() {
 		// TODO Auto-generated method stub
-		return backgroundSprite;
+		return tileBackgroundSprite;
 	}
 	
 	@Override
 	public void draw(GraphicsContext gc,boolean f) {
 		//System.out.println("draw bg");
 		//super.draw(gc, getImage().getImage(), SceneManager.getInstance().getOffsetX(), SceneManager.getInstance().getOffsetY(), width, height);
-		gc.drawImage(getImage().getImage(), x, y, (double) width, (double) height);
+		super.draw(gc, tileBackgroundSprite.getImage(), x, y, width, height);
 	}
 
 }

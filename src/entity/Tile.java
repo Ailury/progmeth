@@ -26,5 +26,10 @@ public class Tile extends Entity {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	//@Override
+	/*public void draw() {
+		
+	}*/
 
 }

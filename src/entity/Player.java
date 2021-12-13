@@ -57,7 +57,7 @@ public class Player extends Entity implements Collidable {
 	public Player() {
 		// TODO Auto-generated constructor stub
 		
-		super(350,SceneManager.getGround()-120,90,90);
+		super(150,SceneManager.getGround()-120,90,90);
 		lastFrameStatus = PlayerStatus.IDLE;
 		
 		status = PlayerStatus.IDLE;
@@ -89,8 +89,8 @@ public class Player extends Entity implements Collidable {
 			status = PlayerStatus.ATTACKING;
 		}else {
 			if(KeyHandler.getInstance().getKeyStatus(68).equals(KeyStatus.DOWN)) {
-				if(getX() < SceneManager.getInstance().getRightBound()) increaseX(moveSpeed);;
-				if(getX() > SceneManager.getInstance().getRightBound()) setX(SceneManager.getInstance().getRightBound());
+				if(getX() < SceneManager.getInstance().getRightBound() + 1280) increaseX(moveSpeed);;
+				if(getX() > SceneManager.getInstance().getRightBound() + 1280 - getW()) setX(SceneManager.getInstance().getRightBound() + 1280 - getW());
 				
 				if(getX() >= SceneManager.getInstance().getLeftBound() + 540) {
 					double newOffSetX = SceneManager.getInstance().getOffsetX()+moveSpeed;
@@ -105,7 +105,7 @@ public class Player extends Entity implements Collidable {
 				if(getX() > SceneManager.getInstance().getLeftBound()) increaseX(-moveSpeed);;
 				if(getX() < SceneManager.getInstance().getLeftBound()) setX(SceneManager.getInstance().getLeftBound());
 					
-				if(getX() <= SceneManager.getInstance().getRightBound() - 540) {
+				if(getX() <= SceneManager.getInstance().getRightBound() + 1280 - 540) {
 					double newOffSetX = SceneManager.getInstance().getOffsetX()-moveSpeed;
 					newOffSetX = (newOffSetX < SceneManager.getInstance().getLeftBound()) ?  SceneManager.getInstance().getLeftBound() : newOffSetX; 
 					SceneManager.getInstance().setOffsetX(newOffSetX);

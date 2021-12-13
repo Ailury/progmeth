@@ -10,7 +10,12 @@ import component.Interactable;
 import entity.Background;
 import entity.Player;
 import entity.Portal;
+<<<<<<< HEAD
 import entity.Powerup;
+||||||| 0c984d4
+=======
+import entity.TileBackground;
+>>>>>>> 2047a3fe453c36495c0849569bf349db78b89b76
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -27,11 +32,11 @@ public class SceneManager extends Canvas implements Serializable {
 	private ArrayList<Interactable> interactable;
 	private Player player;
 	
-	private static final int ground = 650;
+	private static final int ground = 670;
 	private int level;
 	
 	private static final double leftBound = 0;
-	private static final double rightBound = 2560;
+	private static final double rightBound = 1280;
 	
 	private SceneManager() {
 		// TODO Auto-generated constructor stub
@@ -95,6 +100,7 @@ public class SceneManager extends Canvas implements Serializable {
 	
 	public void gameStart() {
 		props.add(new Background());
+		props.add(new TileBackground());
 		props.add(new Portal());
 		Powerup.setUp();
 		Powerup.generate2();
