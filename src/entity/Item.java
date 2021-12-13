@@ -1,20 +1,16 @@
 package entity;
 
-import java.util.ArrayList;
-
 import component.Entity;
 import component.Sprite;
 
-public class powerup extends Entity {
-	
-	private ArrayList<Sprite> sprite;
+public class Item extends Entity {
 
-	public powerup(double x, double y, int w, int h) {
+	public Item(double x, double y, int w, int h) {
 		super(x, y, w, h);
 		// TODO Auto-generated constructor stub
 	}
 
-	public powerup(double x, double y, int r) {
+	public Item(double x, double y, int r) {
 		super(x, y, r);
 		// TODO Auto-generated constructor stub
 	}

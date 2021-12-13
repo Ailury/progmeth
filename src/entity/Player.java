@@ -13,6 +13,10 @@ import logic.SceneManager;
 
 public class Player extends Entity implements Collidable {
 	
+	//Stats
+	private int hp;
+	private int maxHp;
+	
 	//Utility
 	private static int atkable = 0;
 	private static int immune = 0;
@@ -59,6 +63,9 @@ public class Player extends Entity implements Collidable {
 		jumpStatus = PlayerStatus.ONGROUND;
 		direction = 0;
 		currentJumpHeight = 0;
+		
+		hp =0;
+		maxHp =0;
 	}
 
 	@Override
