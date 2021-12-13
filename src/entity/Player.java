@@ -57,7 +57,7 @@ public class Player extends Entity implements Collidable {
 	public Player() {
 		// TODO Auto-generated constructor stub
 		
-		super(150,SceneManager.getGround()-120,90,90);
+		super(150,SceneManager.getGround()-120,120,120);
 		lastFrameStatus = PlayerStatus.IDLE;
 		
 		status = PlayerStatus.IDLE;

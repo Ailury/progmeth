@@ -11,6 +11,7 @@ import entity.Background;
 import entity.Player;
 import entity.Portal;
 import entity.Powerup;
+import entity.Tile;
 import entity.TileBackground;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -24,6 +25,7 @@ public class SceneManager extends Canvas implements Serializable {
 	
 	private ArrayList<Enemy> enemy;
 	private ArrayList<Entity> props;
+	private ArrayList<Tile> tiles;
 	private ArrayList<Collidable> collidable;
 	private ArrayList<Interactable> interactable;
 	private Player player;
@@ -40,6 +42,7 @@ public class SceneManager extends Canvas implements Serializable {
 		
 		enemy = new ArrayList<Enemy>();
 		props = new ArrayList<Entity>();
+		tiles = new ArrayList<Tile>();
 		collidable = new ArrayList<Collidable>();
 		interactable = new ArrayList<Interactable>();
 		player = new Player();
@@ -150,6 +153,10 @@ public class SceneManager extends Canvas implements Serializable {
 		this.props = props;
 	}
 
+	public ArrayList<Tile> getTiles() {
+		return tiles;
+	}
+
 	public ArrayList<Collidable> getCollidable() {
 		return collidable;
 	}
@@ -169,5 +176,9 @@ public class SceneManager extends Canvas implements Serializable {
 	public void setEnemy(ArrayList<Enemy> enemy) {
 		this.enemy = enemy;
 	}
+	
+	public void addTile(Tile tile) {
+		this.tiles.add(tile);
+	};
 	
 }
