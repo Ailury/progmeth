@@ -10,12 +10,8 @@ import component.Interactable;
 import entity.Background;
 import entity.Player;
 import entity.Portal;
-<<<<<<< HEAD
 import entity.Powerup;
-||||||| 0c984d4
-=======
 import entity.TileBackground;
->>>>>>> 2047a3fe453c36495c0849569bf349db78b89b76
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

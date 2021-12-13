@@ -4,10 +4,20 @@ import component.Entity;
 import component.Sprite;
 
 public class Tile extends Entity {
+	
+	private double upperBound;
+	private double lowerBound;
+	private double rightBound;
+	private double leftBound;
+	
 
 	public Tile(double x, double y, int w, int h) {
 		super(x, y, w, h);
 		// TODO Auto-generated constructor stub
+		upperBound = y;
+		lowerBound = y+h;
+		leftBound = x;
+		rightBound = x+w;
 	}
 
 	public Tile(double x, double y, int r) {
