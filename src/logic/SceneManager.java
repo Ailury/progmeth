@@ -66,6 +66,7 @@ public class SceneManager extends Canvas implements Serializable {
 	
 	public void gameStart() {
 		entitys.add(new Background());
+		entitys.add(new Flag());
 	}
 
 
