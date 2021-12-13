@@ -14,7 +14,7 @@ public class Powerup extends Entity implements Collidable{
 	private int type;
 
 	public Powerup(double x,int type) {
-		super(x, SceneManager.getGround()-50,50,50);
+		super(x, 620 ,50,50);
 		// TODO Auto-generated constructor stub
 		this.type = type;
 	}

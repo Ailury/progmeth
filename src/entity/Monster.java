@@ -11,8 +11,8 @@ public class Monster extends Enemy {
 	private static ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	private int type;
 
-	public Monster(double x,int type) {
-		super(x, SceneManager.getGround()-120 , 120, 120);
+	public Monster(double x, double y, int type) {
+		super(x, y, 120, 120);
 		// TODO Auto-generated constructor stub
 	}
 

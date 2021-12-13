@@ -30,7 +30,6 @@ public class SceneManager extends Canvas implements Serializable {
 	private ArrayList<Interactable> interactable;
 	private Player player;
 	
-	private static final int ground = 670;
 	private int level;
 	
 	private static final double leftBound = 0;
@@ -130,9 +129,6 @@ public class SceneManager extends Canvas implements Serializable {
 		return player;
 	}
 
-	public static int getGround() {
-		return ground;
-	}
 
 	public int getLevel() {
 		return level;
