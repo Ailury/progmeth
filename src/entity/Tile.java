@@ -5,19 +5,21 @@ import component.Sprite;
 
 public class Tile extends Entity {
 	
+	private static boolean transparent;
 	private double upperBound;
 	private double lowerBound;
 	private double rightBound;
 	private double leftBound;
 	
 
-	public Tile(double x, double y, int w, int h) {
+	public Tile(double x, double y, int w, int h, boolean t) {
 		super(x, y, w, h);
 		// TODO Auto-generated constructor stub
 		upperBound = y;
 		lowerBound = y+h;
 		leftBound = x;
 		rightBound = x+w;
+		transparent = t;
 	}
 
 	public Tile(double x, double y, int r) {
@@ -53,6 +55,15 @@ public class Tile extends Entity {
 		return leftBound;
 	}
 
+	public static boolean isTransparent() {
+		return transparent;
+	}
+
+	public static void setTransparent(boolean transparent) {
+		Tile.transparent = transparent;
+	}
+	
+	
 	
 	//@Override
 	/*public void draw() {

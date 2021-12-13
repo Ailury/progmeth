@@ -11,8 +11,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.AudioClip;
 import logic.KeyHandler;
 import logic.SceneManager;
+import util.GameUtil;
 
-public class Player extends Entity implements Collidable{
+public class Player extends Entity implements Collidable, Fallable{
 	
 	//Stats
 	private int hp;
@@ -123,34 +124,20 @@ public class Player extends Entity implements Collidable{
 			if(direction == 0) {status = PlayerStatus.IDLE;}
 			if(KeyHandler.getInstance().getKeyStatus(32).equals(KeyStatus.DOWN)) {
 				if(jumpStatus.equals(PlayerStatus.ONGROUND)) {
+					setVy(-initJumpSpeed);
 					jumpSpeed = initJumpSpeed;
 					jumpStatus = PlayerStatus.GOINGUP;
 				}
 			}
 		}
-		if(jumpStatus.equals(PlayerStatus.GOINGUP)) {
-			
-			increaseY(-jumpSpeed);
-			jumpSpeed = (jumpSpeed > 0) ? jumpSpeed - g : 0;
-			if(jumpSpeed == 0) {
-				jumpStatus = PlayerStatus.FALLING;
-			}
+		int fallBack = fall();
+		if(fallBack == -1) {
+			jumpStatus = PlayerStatus.GOINGUP;
 		}
-		if(jumpStatus.equals(PlayerStatus.FALLING)) {
-			
-			increaseY(jumpSpeed);
-			jumpSpeed = jumpSpeed + g;
-			for(Tile tile : SceneManager.getInstance().getTiles()) {
-				if(getX() >= tile.getLeftBound() && getX()+getW() <= tile.getRightBound()) {
-					if(getY()+getH() > tile.getUpperBound() && getY() <= tile.getLowerBound()) {
-						setY(tile.getUpperBound()  - getH());
-						jumpStatus = PlayerStatus.ONGROUND;
-						jumpSpeed = initJumpSpeed;
-					}
-				}
-			}
-			
+		if(fallBack == 1) {
+			jumpStatus = PlayerStatus.FALLING;
 		}
+		
 		if(immune ==0) {
 			for(Enemy e:SceneManager.getInstance().getEnemy()) {
 				if(e.collideWith(this)) {
@@ -162,6 +149,27 @@ public class Player extends Entity implements Collidable{
 		
 		atkable = (atkable == 0) ? atkable : atkable - 1;
 		immune = (immune == 0) ? immune : immune - 1;
+	}
+	
+	
+	@Override
+	public int fall() {
+		double prevy = getY();
+		increaseY(getVy());
+		setVy(getVy() + GameUtil.gravity);
+		for(Tile tile : SceneManager.getInstance().getTiles()) {
+			if(getX() >= tile.getLeftBound() && getX()+getW() <= tile.getRightBound()) {
+				if(getY()+getH() > tile.getUpperBound() && getY() <= tile.getLowerBound()) {
+					setY(tile.getUpperBound()  - getH());
+					jumpStatus = PlayerStatus.ONGROUND;
+					setVy(0);
+				}
+			}
+		}
+		if(prevy == getY()) return 0;
+		if(prevy < getY()) return 1;
+		if(prevy > getY()) return -1;
+		return 0;
 	}
 	
 	

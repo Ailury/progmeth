@@ -5,16 +5,17 @@ import java.util.Random;
 
 import component.Collidable;
 import component.Entity;
+import component.Fallable;
 import component.Sprite;
 import logic.SceneManager;
 
-public class Powerup extends Entity implements Collidable{
+public class Powerup extends Entity implements Collidable, Fallable{
 	
 	private static ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	private int type;
 
 	public Powerup(double x,int type) {
-		super(x, 620 ,50,50);
+		super(x, 520 ,50,50);
 		// TODO Auto-generated constructor stub
 		this.type = type;
 	}
@@ -22,6 +23,7 @@ public class Powerup extends Entity implements Collidable{
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+		fall();
 		checkCollide();
 	}
 

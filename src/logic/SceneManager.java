@@ -16,6 +16,7 @@ import entity.TileBackground;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import util.TileGenerator;
 
 public class SceneManager extends Canvas implements Serializable {
 
