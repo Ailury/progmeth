@@ -94,7 +94,7 @@ public class Player extends Entity implements Collidable {
 				if(getX() < SceneManager.getInstance().getRightBound()) increaseX(moveSpeed);;
 				if(getX() > SceneManager.getInstance().getRightBound()- getW()) setX(SceneManager.getInstance().getRightBound() - getW());
 				
-				if(getX() >= SceneManager.getInstance().getLeftBound() + 540) {
+				if(getX() >= SceneManager.getInstance().getLeftBound() + 640 - getW()) {
 					double newOffSetX = SceneManager.getInstance().getOffsetX()+moveSpeed ;
 					newOffSetX = (newOffSetX > SceneManager.getInstance().getRightBound() - 1280) ?  SceneManager.getInstance().getRightBound() - 1280 : newOffSetX; 
 					SceneManager.getInstance().setOffsetX(newOffSetX);
@@ -107,7 +107,7 @@ public class Player extends Entity implements Collidable {
 				if(getX() > SceneManager.getInstance().getLeftBound()) increaseX(-moveSpeed);;
 				if(getX() < SceneManager.getInstance().getLeftBound()) setX(SceneManager.getInstance().getLeftBound());
 					
-				if(getX() <= SceneManager.getInstance().getRightBound()- 540) {
+				if(getX() <= SceneManager.getInstance().getRightBound() - 640 - getW()) {
 					double newOffSetX = SceneManager.getInstance().getOffsetX()-moveSpeed;
 					newOffSetX = (newOffSetX < SceneManager.getInstance().getLeftBound()) ?  SceneManager.getInstance().getLeftBound() : newOffSetX; 
 					SceneManager.getInstance().setOffsetX(newOffSetX);
