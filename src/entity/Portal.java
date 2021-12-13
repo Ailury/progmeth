@@ -5,11 +5,11 @@ import component.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import logic.SceneManager;
 
-public class flag extends Entity {
+public class Portal extends Entity {
 
 	private Sprite portal;
 	
-	public flag() {
+	public Portal() {
 		super(1280-200, SceneManager.getGround()-150, 90, 150);
 		// TODO Auto-generated constructor stub
 		portal = new Sprite("sprite/checkpoint/portal_end.gif");
