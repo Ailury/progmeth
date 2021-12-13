@@ -16,6 +16,7 @@ public class Player extends Entity implements Collidable {
 	//Stats
 	private int hp;
 	private int maxHp;
+	private int atk;
 	
 	//Utility
 	private static int atkable = 0;
@@ -28,12 +29,12 @@ public class Player extends Entity implements Collidable {
 	private PlayerStatus status;
 	private PlayerStatus lastFrameStatus;
 	private int direction;
-	private static final double moveSpeed = 7.0;
+	private static double moveSpeed = 7.0;
 	
 	// Jumping
 	private PlayerStatus jumpStatus;
 	private static double jumpSpeed;
-	private static final double initJumpSpeed = 10;
+	private static double initJumpSpeed = 10;
 	private static final int maxJumpHeight = 300;
 	private double currentJumpHeight;
 	
@@ -48,7 +49,7 @@ public class Player extends Entity implements Collidable {
 	private static final Sprite jump_up = new Sprite("sprite/character/player/jump_up.gif");
 	private static final Sprite jump_down = new Sprite("sprite/character/player/jump_down.gif");
 	private static final Sprite death = new Sprite("sprite/character/player/death.gif");
-	private static final Sprite atk = new Sprite("sprite/character/player/attack.gif");
+	private static final Sprite attack = new Sprite("sprite/character/player/attack.gif");
 	
 	
 	
@@ -64,8 +65,9 @@ public class Player extends Entity implements Collidable {
 		direction = 0;
 		currentJumpHeight = 0;
 		
-		hp =0;
-		maxHp =0;
+		hp =100;
+		maxHp =100;
+		atk = 10;
 	}
 
 	@Override
@@ -81,7 +83,7 @@ public class Player extends Entity implements Collidable {
 			atkable += 81;
 			//atkSound.play();
 			attack();
-			atk.loadImage(atk.getFilepath());
+			attack.loadImage(attack.getFilepath());
 		}
 		if(atkable > 41) {
 			status = PlayerStatus.ATTACKING;
@@ -163,7 +165,7 @@ public class Player extends Entity implements Collidable {
 	public Sprite getImage() {
 		// TODO Auto-generated method stub
 		if(atkable > 40) {
-			return atk;
+			return attack;
 		}
 		if(jumpStatus.equals(PlayerStatus.GOINGUP)){
 			return jump_up;
@@ -212,4 +214,15 @@ public class Player extends Entity implements Collidable {
 		hp = (hp>maxHp) ? maxHp : (hp<0) ? 0 : hp;
 	}
 	
+	public void changeAtk(int atk) {
+		this.atk += atk;
+	}
+	
+	public void changeJumpH(int h) {
+		this.initJumpSpeed += h;
+	}
+	
+	public void changemvsp(int sp) {
+		this.moveSpeed += sp;
+	}
 }

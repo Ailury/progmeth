@@ -10,6 +10,7 @@ import component.Interactable;
 import entity.Background;
 import entity.Player;
 import entity.Portal;
+import entity.Powerup;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -95,6 +96,8 @@ public class SceneManager extends Canvas implements Serializable {
 	public void gameStart() {
 		props.add(new Background());
 		props.add(new Portal());
+		Powerup.setUp();
+		Powerup.generate2();
 	}
 
 
