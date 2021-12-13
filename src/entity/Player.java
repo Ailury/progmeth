@@ -47,14 +47,14 @@ public class Player extends Entity implements Collidable {
 	private static final Sprite atk = new Sprite("sprite/character/player/attack.gif");
 	
 	
-	private double prevY ;
+	
 
 	public Player() {
 		// TODO Auto-generated constructor stub
 		
-		super(250,SceneManager.getGround()-120,120,120);
+		super(250,SceneManager.getGround()-120,90,90);
 		lastFrameStatus = PlayerStatus.IDLE;
-		prevY = SceneManager.getGround();
+		
 		status = PlayerStatus.IDLE;
 		jumpStatus = PlayerStatus.ONGROUND;
 		direction = 0;
@@ -81,11 +81,17 @@ public class Player extends Entity implements Collidable {
 		}else {
 			if(KeyHandler.getInstance().getKeyStatus(68).equals(KeyStatus.DOWN)) {
 				increaseX(moveSpeed);;
+				double newOffSetX = SceneManager.getInstance().getOffsetX()+moveSpeed;
+				newOffSetX = (newOffSetX > SceneManager.getInstance().getRightBound()) ?  SceneManager.getInstance().getRightBound() : newOffSetX; 
+				SceneManager.getInstance().setOffsetX(newOffSetX);
 				direction = 1;
 				face = PlayerStatus.RIGHT;
 			}
 			if(KeyHandler.getInstance().getKeyStatus(65).equals(KeyStatus.DOWN)) {
 				increaseX(-moveSpeed);;
+				double newOffSetX = SceneManager.getInstance().getOffsetX()-moveSpeed;
+				newOffSetX = (newOffSetX < SceneManager.getInstance().getLeftBound()) ?  SceneManager.getInstance().getLeftBound() : newOffSetX; 
+				SceneManager.getInstance().setOffsetX(newOffSetX);
 				direction = -1;
 				face = PlayerStatus.LEFT;
 			}
@@ -130,8 +136,8 @@ public class Player extends Entity implements Collidable {
 				}
 			}
 		}
-		if(getY() != prevY)System.out.println(getY());
-		prevY = getY();
+		
+		
 		atkable = (atkable == 0) ? atkable : atkable - 1;
 		immune = (immune == 0) ? immune : immune - 1;
 	}

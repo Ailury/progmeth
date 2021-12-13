@@ -22,6 +22,9 @@ public class SceneManager extends Canvas implements Serializable {
 	private static final int ground = 650;
 	private int level;
 	
+	private static final double leftBound = 0;
+	private static final double rightBound = 2560;
+	
 	private SceneManager() {
 		// TODO Auto-generated constructor stub
 		super(1280, 720);
@@ -96,6 +99,14 @@ public class SceneManager extends Canvas implements Serializable {
 
 	public int getLevel() {
 		return level;
+	}
+	
+	public double getLeftBound() {
+		return leftBound;
+	}
+	
+	public double getRightBound() {
+		return rightBound;
 	}
 	
 }

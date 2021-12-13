@@ -14,8 +14,17 @@ public class Background extends Entity {
 
 	// Images
 	private static Sprite backgroundSprite;
+	private static Sprite nextBG;
+	
 
 	public Background() {
+		// TODO Auto-generated constructor stub
+		super(x,y,1280,720);
+		backgroundSprite = new Sprite("sprite/background/jungle.png");
+		nextBG = new Sprite("sprite/background/jungle.png");
+	}
+	
+	public Background(double x, double y) {
 		// TODO Auto-generated constructor stub
 		super(x,y,1280,720);
 		backgroundSprite = new Sprite("sprite/background/jungle.png");
@@ -37,7 +46,8 @@ public class Background extends Entity {
 	public void draw(GraphicsContext gc,boolean f) {
 		//System.out.println("draw bg");
 		//super.draw(gc, getImage().getImage(), SceneManager.getInstance().getOffsetX(), SceneManager.getInstance().getOffsetY(), width, height);
-		super.draw(gc, getImage().getImage(), x, y, width, height);
+		super.draw(gc, backgroundSprite.getImage(), x - SceneManager.getInstance().getOffsetX(), y, width, height);
+		super.draw(gc, nextBG.getImage(), x + width - SceneManager.getInstance().getOffsetX(), y, width, height);
 	}
 
 }
