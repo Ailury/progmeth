@@ -18,7 +18,7 @@ public class Background extends Entity {
 	public Background() {
 		// TODO Auto-generated constructor stub
 		super(x,y,1280,720);
-		backgroundSprite = new Sprite("jungle.png");
+		backgroundSprite = new Sprite("sprite/background/jungle.png");
 	}
 	
 	@Override

@@ -16,7 +16,7 @@ public class Player extends Entity {
 	private static int atkable = 0;
 	private static int immune = 0;
 	protected static PlayerStatus face = PlayerStatus.RIGHT;
-	private static final AudioClip atkSound = new AudioClip(ClassLoader.getSystemResource("attackk.wav").toString());
+	//private static final AudioClip atkSound = new AudioClip(ClassLoader.getSystemResource("attackk.wav").toString());
 	private static final double g = 0.35  ;
 		
 	// IDLE/RUN
@@ -38,12 +38,12 @@ public class Player extends Entity {
 	public static boolean needResetPos = false;
 	
 	// Images
-	private static final Sprite idle = new Sprite("idle.gif");
-	private static final Sprite run = new Sprite("run.gif");
-	private static final Sprite jump_up = new Sprite("jump_up.gif");
-	private static final Sprite jump_down = new Sprite("jump_down.gif");
-	private static final Sprite death = new Sprite("death.gif");
-	private static final Sprite atk = new Sprite("attack.gif");
+	private static final Sprite idle = new Sprite("sprite/character/player/idle.gif");
+	private static final Sprite run = new Sprite("sprite/character/player/run.gif");
+	private static final Sprite jump_up = new Sprite("sprite/character/player/jump_up.gif");
+	private static final Sprite jump_down = new Sprite("sprite/character/player/jump_down.gif");
+	private static final Sprite death = new Sprite("sprite/character/player/death.gif");
+	private static final Sprite atk = new Sprite("sprite/character/player/attack.gif");
 	
 	
 	private double prevY ;
@@ -71,7 +71,7 @@ public class Player extends Entity {
 		if(atkable == 0 && jumpStatus.equals(PlayerStatus.ONGROUND) && KeyHandler.getInstance().getKeyStatus(83).equals(KeyStatus.DOWN)) {
 			
 			atkable += 81;
-			atkSound.play();
+			//atkSound.play();
 			attack();
 			atk.loadImage(atk.getFilepath());
 		}
