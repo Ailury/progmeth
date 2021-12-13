@@ -88,17 +88,21 @@ public class Player extends Entity implements Collidable {
 		}else {
 			if(KeyHandler.getInstance().getKeyStatus(68).equals(KeyStatus.DOWN)) {
 				increaseX(moveSpeed);;
-				double newOffSetX = SceneManager.getInstance().getOffsetX()+moveSpeed;
-				newOffSetX = (newOffSetX > SceneManager.getInstance().getRightBound()) ?  SceneManager.getInstance().getRightBound() : newOffSetX; 
-				SceneManager.getInstance().setOffsetX(newOffSetX);
+				if(getX() >= SceneManager.getInstance().getLeftBound() + 540) {
+					double newOffSetX = SceneManager.getInstance().getOffsetX()+moveSpeed;
+					newOffSetX = (newOffSetX > SceneManager.getInstance().getRightBound()) ?  SceneManager.getInstance().getRightBound() : newOffSetX; 
+					SceneManager.getInstance().setOffsetX(newOffSetX);
+				}
 				direction = 1;
 				face = PlayerStatus.RIGHT;
 			}
 			if(KeyHandler.getInstance().getKeyStatus(65).equals(KeyStatus.DOWN)) {
 				increaseX(-moveSpeed);;
-				double newOffSetX = SceneManager.getInstance().getOffsetX()-moveSpeed;
-				newOffSetX = (newOffSetX < SceneManager.getInstance().getLeftBound()) ?  SceneManager.getInstance().getLeftBound() : newOffSetX; 
-				SceneManager.getInstance().setOffsetX(newOffSetX);
+				if(getX() <= SceneManager.getInstance().getRightBound() - 540) {
+					double newOffSetX = SceneManager.getInstance().getOffsetX()-moveSpeed;
+					newOffSetX = (newOffSetX < SceneManager.getInstance().getLeftBound()) ?  SceneManager.getInstance().getLeftBound() : newOffSetX; 
+					SceneManager.getInstance().setOffsetX(newOffSetX);
+				}
 				direction = -1;
 				face = PlayerStatus.LEFT;
 			}
