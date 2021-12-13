@@ -2,7 +2,7 @@ package component;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public class Enemy extends Entity {
+public class Enemy extends Entity implements Collidable{
 
 	public Enemy(double x, double y, int w, int h) {
 		super(x, y, w, h);
@@ -28,6 +28,12 @@ public class Enemy extends Entity {
 	
 	@Override
 	public void draw(GraphicsContext gc,boolean f) {
+		
+	}
+
+	@Override
+	public void checkCollide() {
+		// TODO Auto-generated method stub
 		
 	}
 

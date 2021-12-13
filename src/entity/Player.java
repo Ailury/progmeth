@@ -146,8 +146,8 @@ public class Player extends Entity implements Collidable {
 			}
 		}
 		if(immune ==0) {
-			for(Entity e:SceneManager.getInstance().getEntity()) {
-				if((e instanceof Enemy) && e.collideWith(this)) {
+			for(Enemy e:SceneManager.getInstance().getEnemy()) {
+				if(e.collideWith(this)) {
 					takeDamage(10);
 					immune += 201;
 				}
@@ -199,6 +199,17 @@ public class Player extends Entity implements Collidable {
 	
 	private void takeDamage(int x) {
 		
+	}
+
+	@Override
+	public void checkCollide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void changeHp(int hp) {
+		this.hp += hp;
+		hp = (hp>maxHp) ? maxHp : (hp<0) ? 0 : hp;
 	}
 	
 }
