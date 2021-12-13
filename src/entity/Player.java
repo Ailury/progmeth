@@ -1,5 +1,6 @@
 package entity;
 
+import component.Collidable;
 import component.Enemy;
 import component.Entity;
 import component.KeyStatus;
@@ -10,7 +11,7 @@ import javafx.scene.media.AudioClip;
 import logic.KeyHandler;
 import logic.SceneManager;
 
-public class Player extends Entity {
+public class Player extends Entity implements Collidable {
 	
 	//Utility
 	private static int atkable = 0;
