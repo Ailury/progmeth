@@ -3,6 +3,7 @@ package entity;
 import component.Collidable;
 import component.Enemy;
 import component.Entity;
+import component.Fallable;
 import component.KeyStatus;
 import component.PlayerStatus;
 import component.Sprite;
@@ -11,7 +12,7 @@ import javafx.scene.media.AudioClip;
 import logic.KeyHandler;
 import logic.SceneManager;
 
-public class Player extends Entity implements Collidable {
+public class Player extends Entity implements Collidable{
 	
 	//Stats
 	private int hp;
@@ -35,8 +36,7 @@ public class Player extends Entity implements Collidable {
 	private PlayerStatus jumpStatus;
 	private static double jumpSpeed;
 	private static double initJumpSpeed = 10;
-	private static final int maxJumpHeight = 300;
-	private double currentJumpHeight;
+	
 	
 	// Position
 //	public static double x = 100;
@@ -57,13 +57,12 @@ public class Player extends Entity implements Collidable {
 	public Player() {
 		// TODO Auto-generated constructor stub
 		
-		super(150,SceneManager.getGround()-120,120,120);
+		super(150,550,120,120);
 		lastFrameStatus = PlayerStatus.IDLE;
-		
+		jumpSpeed = 0;
 		status = PlayerStatus.IDLE;
 		jumpStatus = PlayerStatus.ONGROUND;
 		direction = 0;
-		currentJumpHeight = 0;
 		
 		hp =100;
 		maxHp =100;
@@ -130,7 +129,7 @@ public class Player extends Entity implements Collidable {
 			}
 		}
 		if(jumpStatus.equals(PlayerStatus.GOINGUP)) {
-			currentJumpHeight += jumpSpeed;
+			
 			increaseY(-jumpSpeed);
 			jumpSpeed = (jumpSpeed > 0) ? jumpSpeed - g : 0;
 			if(jumpSpeed == 0) {
@@ -138,16 +137,19 @@ public class Player extends Entity implements Collidable {
 			}
 		}
 		if(jumpStatus.equals(PlayerStatus.FALLING)) {
-			currentJumpHeight -= jumpSpeed;
-			if(currentJumpHeight <= 0) jumpSpeed -= -currentJumpHeight;
+			
 			increaseY(jumpSpeed);
-			if(getY() > 530) setY(SceneManager.getGround() - getH());
 			jumpSpeed = jumpSpeed + g;
-			if(currentJumpHeight <= 0) {
-				currentJumpHeight = 0;
-				jumpStatus = PlayerStatus.ONGROUND;
-				jumpSpeed = initJumpSpeed;
+			for(Tile tile : SceneManager.getInstance().getTiles()) {
+				if(getX() >= tile.getLeftBound() && getX()+getW() <= tile.getRightBound()) {
+					if(getY()+getH() > tile.getUpperBound() && getY() <= tile.getLowerBound()) {
+						setY(tile.getUpperBound()  - getH());
+						jumpStatus = PlayerStatus.ONGROUND;
+						jumpSpeed = initJumpSpeed;
+					}
+				}
 			}
+			
 		}
 		if(immune ==0) {
 			for(Enemy e:SceneManager.getInstance().getEnemy()) {
@@ -158,10 +160,13 @@ public class Player extends Entity implements Collidable {
 			}
 		}
 		
-		
 		atkable = (atkable == 0) ? atkable : atkable - 1;
 		immune = (immune == 0) ? immune : immune - 1;
 	}
+	
+	
+	
+	
 
 	@Override
 	public Sprite getImage() {

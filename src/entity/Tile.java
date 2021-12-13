@@ -37,6 +37,23 @@ public class Tile extends Entity {
 		return null;
 	}
 	
+	public double getUpperBound() {
+		return upperBound;
+	}
+
+	public double getLowerBound() {
+		return lowerBound;
+	}
+
+	public double getRightBound() {
+		return rightBound;
+	}
+
+	public double getLeftBound() {
+		return leftBound;
+	}
+
+	
 	//@Override
 	/*public void draw() {
 		
