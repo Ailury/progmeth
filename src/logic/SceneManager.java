@@ -10,6 +10,7 @@ import component.Interactable;
 import entity.Background;
 import entity.Player;
 import entity.Portal;
+import entity.TileBackground;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -26,7 +27,7 @@ public class SceneManager extends Canvas implements Serializable {
 	private ArrayList<Interactable> interactable;
 	private Player player;
 	
-	private static final int ground = 650;
+	private static final int ground = 670;
 	private int level;
 	
 	private static final double leftBound = 0;
@@ -94,6 +95,7 @@ public class SceneManager extends Canvas implements Serializable {
 	
 	public void gameStart() {
 		props.add(new Background());
+		props.add(new TileBackground());
 		props.add(new Portal());
 	}
 
